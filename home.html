@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>Food App</title>
+</head>
+<body>
+    <h2> Food API</h2>
+    <div>
+        <button id="token" onclick="token()">Call API for token</button>
+    </div>
+    <div>
+        <button onClick="foodGet()">Call API for Food.get</button>
+    </div>
+    <div>
+        <button onClick="foodBarcode()" >Call API for Food.barcode</button>
+    </div>
+    <span>------------foodGet-----------------</span><br/>
+    <span class="result" id="foodGet"> result </span><br/>
+
+    <span>------------foodBarcode-----------------</span><br/>
+    <span class="result" id="foodBarcode"> result </span>
+    <script>
+        const resultHtml = document.getElementsByClassName('result');
+
+       async function token() {
+           await fetch('http://localhost:3000/token')
+           .then( response => response.json() )
+           .then( result => window.localStorage.setItem("TOKEN", result.access_token) );
+       }
+
+        async function foodGet() {
+           const token = window.localStorage.getItem('TOKEN');
+           await fetch('http://localhost:3000/foodGet', { headers: { "Authorization": `Bearer ${token}` }})
+           .then( response => response.json() )
+           .then( result => {
+                console.log("------------foodGet--------------");
+                console.log(result); 
+                document.getElementById('foodGet').innerHTML = JSON.stringify(result);
+            } );
+       }
+
+
+       async function foodBarcode() {
+           const token = window.localStorage.getItem('TOKEN');
+           await fetch('http://localhost:3000/foodBarcode', { headers: { "Authorization": `Bearer ${token}` }})
+           .then( response => response.json() )
+           .then( result => {
+                console.log("------------foodBarcode--------------");
+                console.log(result); 
+                document.getElementById('foodBarcode').innerHTML = JSON.stringify(result);
+            } );
+       }
+
+
+    </script>
+</body>
+</html>
