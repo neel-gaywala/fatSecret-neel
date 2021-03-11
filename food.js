@@ -12,8 +12,8 @@ route.get("/", async (request, response) => {
 });
 
 //set your data
-clientID = "96a033ae333645abae4b24c0f2109061";
-clientSecret = "699c278daf7642438d6454ad0bfcd241";
+clientID = "";
+clientSecret = "";
 foodId = '33691';
 barcodeGTIN = '025293001497';
 
