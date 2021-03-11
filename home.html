@@ -31,6 +31,10 @@
            .then( response => response.json() )
            .then( result => window.localStorage.setItem("TOKEN", result.access_token) );
 
+           await fetch('http://localhost:3000/tokenBarcode')
+           .then( response => response.json() )
+           .then( result => { console.log(result); window.localStorage.setItem("TOKENBARCODE", result.access_token);} );
+
            console.log("------------token received--------------");
        }
 
@@ -47,7 +51,7 @@
 
 
        async function foodBarcode() {
-           const token = window.localStorage.getItem('TOKEN');
+           const token = window.localStorage.getItem('TOKENBARCODE');
            await fetch('http://localhost:3000/foodBarcode', { headers: { "Authorization": `Bearer ${token}`, "barcode": `8901072000016` }})
            .then( response => response.json() )
            .then( result => {
