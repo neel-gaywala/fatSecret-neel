@@ -12,11 +12,10 @@ route.get("/", async (request, response) => {
 });
 
 //set your data
-clientID = "YOUR_CLIENT_ID";
-clientSecret = "YOUR_CLIENT SECRET";
+clientID = "YOUR CLIENT ID";
+clientSecret = "YOUR CLIENT SECRET";
 foodId = '33691';
-barcodeGTIN = '';
-
+barcodeGTIN = '025293001497';
 
 // FOR ACCESS TOKEN API
 var optionsToken = {
@@ -85,6 +84,7 @@ route.get('/foodBarcode', async (req, res) => {
   form: {
     method: "food.find_id_for_barcode",
     barcode: `${barcodeGTIN}`,
+    format: 'json'
   },
   json: true,
   };

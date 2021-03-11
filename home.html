@@ -30,6 +30,8 @@
            await fetch('http://localhost:3000/token')
            .then( response => response.json() )
            .then( result => window.localStorage.setItem("TOKEN", result.access_token) );
+
+           console.log("------------token received--------------");
        }
 
         async function foodGet() {
@@ -46,7 +48,7 @@
 
        async function foodBarcode() {
            const token = window.localStorage.getItem('TOKEN');
-           await fetch('http://localhost:3000/foodBarcode', { headers: { "Authorization": `Bearer ${token}` }})
+           await fetch('http://localhost:3000/foodBarcode', { headers: { "Authorization": `Bearer ${token}`, "barcode": `8901072000016` }})
            .then( response => response.json() )
            .then( result => {
                 console.log("------------foodBarcode--------------");
